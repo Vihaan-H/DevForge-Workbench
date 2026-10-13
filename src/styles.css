@@ -39,3 +39,69 @@
 .judge-status{display:flex;align-items:center;gap:7px;font:9px "DM Mono",monospace;padding:7px 9px;border-radius:5px}
 .judge-status.passed{color:#bfe887;background:#27311e}.judge-status.failed{color:#ff9b8d;background:#392321}
 @media(max-width:950px){.inspector-layout,.judge-layout{grid-template-columns:1fr}.inspector-files{min-height:350px}.judge-layout .editor-panel textarea{min-height:300px}}
+
+
+/* Phase 05: PromptLab */
+.prompt-layout{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:12px;align-items:start}
+.prompt-editor{min-height:0}
+.prompt-editor>textarea{min-height:270px!important;flex:initial}
+.prompt-meta{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:13px;border-bottom:1px solid #292e25}
+.prompt-meta input,.prompt-meta select,.judge-field input,.judge-field select{width:100%;min-width:0;border:1px solid #343b2f;border-radius:5px;background:#11140f;color:#dce2d3;padding:10px;font:10px/1.6 "DM Mono",monospace}
+.prompt-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:11px 13px;border-top:1px solid #292e25}
+.prompt-actions>span{font-size:9px;line-height:1.5;color:#858e79}
+.prompt-actions button:disabled,.prompt-run-panel button:disabled,.regression-compare-button:disabled{opacity:.4;cursor:not-allowed}
+.version-list{display:flex;flex-direction:column;padding:9px;gap:6px}
+.version-row{display:flex;justify-content:space-between;align-items:center;gap:12px;text-align:left;padding:9px;border:1px solid #2b3127;border-radius:5px;background:#191c17;color:#a2ab96}
+.version-row>span:first-child{display:flex;flex-direction:column;gap:4px}
+.version-row strong{font:11px "DM Mono",monospace;color:#dce2d3}
+.version-row small,.version-row>span:last-child{font:9px "DM Mono",monospace;color:#78806f}
+.version-row.version-active{border-color:#647d3c;background:#252e1d}
+.case-summary{border:1px solid #2d3427;background:#1a1e17;border-radius:6px;padding:12px;margin:12px 0}
+.case-summary>strong{font-size:12px}
+.case-summary p{font-size:10px;line-height:1.65;color:#a4ad98;white-space:pre-wrap;overflow-wrap:anywhere}
+.case-summary>div{color:#8b967d;font:9px "DM Mono",monospace}
+.case-form{display:flex;flex-direction:column;gap:11px;padding-top:12px;margin-top:10px;border-top:1px solid #2c3228}
+.case-form .judge-field textarea{min-height:55px}
+.quiet-copy{font-size:10px;line-height:1.7;color:#899280}
+.prompt-run-panel{margin-top:12px}
+.prompt-run-panel>.judge-field{margin-top:12px}
+.prompt-output{min-height:145px!important}
+.last-run{display:flex;flex-direction:column;gap:9px;margin-top:12px;padding:12px;border:1px solid #2c3228;border-radius:6px;background:#191c17}
+.last-run p{font-size:10px;line-height:1.65;color:#a6ae9b;margin:0;overflow-wrap:anywhere}
+.run-compare-selects{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:15px}
+.output-comparison{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:13px}
+.output-comparison>div{min-width:0;border:1px solid #30362b;border-radius:6px;background:#191c17;padding:12px}
+.output-comparison strong{display:block;font:10px "DM Mono",monospace;color:#c6d4b5;overflow-wrap:anywhere}
+.output-comparison pre{font:10px/1.7 "DM Mono",monospace;color:#b7c1ac;white-space:pre-wrap;overflow-wrap:anywhere;max-height:280px;overflow:auto}
+.output-comparison>p{grid-column:1/-1;margin:0;color:#96a28a;font-size:10px}
+
+/* Phase 06: RegressionLab */
+.snapshot-shelf{margin-top:12px}
+.snapshot-list{display:flex;flex-direction:column;gap:6px;margin-top:13px;max-height:330px;overflow:auto}
+.snapshot-row{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px;border:1px solid #2c3228;background:#191c17;border-radius:6px}
+.snapshot-row>div:first-child{min-width:0;display:flex;flex-direction:column;gap:5px}
+.snapshot-row strong{font-size:11px;overflow-wrap:anywhere}
+.snapshot-row small{font:9px "DM Mono",monospace;color:#7f8973;line-height:1.5}
+.snapshot-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.snapshot-actions .text-action{white-space:nowrap}
+.import-snapshot{display:inline-flex!important;align-items:center;gap:6px;cursor:pointer}
+.regression-controls{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:12px;margin:13px 0}
+.regression-controls>.judge-field{display:flex;flex-direction:column;gap:6px;font-size:10px;color:#c7d2bc}
+.regression-controls .judge-check{align-self:stretch}
+.regression-workspace .editor-panel{min-height:500px}
+.regression-workspace .editor-panel textarea{min-height:350px}
+.snapshot-label{display:flex;flex-direction:column;gap:6px;border-bottom:1px solid #292e25;padding:10px 13px;font-size:10px;color:#aeb8a1}
+.snapshot-label input{width:100%;border:1px solid #343b2f;border-radius:5px;background:#11140f;color:#dce2d3;padding:9px;font:10px "DM Mono",monospace}
+.regression-workspace .editor-footer{gap:10px}
+.regression-compare-button{margin-top:13px}
+.regression-results{margin-top:14px}
+.diff-list{display:flex;flex-direction:column;overflow:auto;max-height:650px;border:1px solid #2b3127;border-radius:6px;background:#11130f}
+.diff-line{display:grid;grid-template-columns:22px 36px 36px minmax(0,1fr);align-items:start;gap:5px;padding:3px 8px;border-bottom:1px solid #20241e;font:10px/1.65 "DM Mono",monospace;min-width:0}
+.diff-line>span{text-align:center;color:#838c79}
+.diff-line>small{color:#687260;text-align:right;user-select:none}
+.diff-line code{white-space:pre-wrap;overflow-wrap:anywhere;color:#aeb8a2}
+.diff-added{background:#1d2a19}.diff-added>span,.diff-added code{color:#b9e68e}
+.diff-removed{background:#30201f}.diff-removed>span,.diff-removed code{color:#ff9a90}
+.diff-same code{color:#7f8876}
+@media(max-width:1000px){.prompt-layout{grid-template-columns:1fr}.prompt-editor>textarea{min-height:220px!important}.regression-controls{grid-template-columns:1fr}.snapshot-row{align-items:flex-start;flex-direction:column}.snapshot-actions{justify-content:flex-start}}
+@media(max-width:600px){.prompt-meta,.run-compare-selects,.output-comparison{grid-template-columns:1fr}.output-comparison>p{grid-column:auto}.prompt-actions{align-items:flex-start;flex-direction:column}.diff-line{grid-template-columns:18px 26px 26px minmax(0,1fr);font-size:9px}.toolbar-actions .import-snapshot{display:none}.snapshot-actions{gap:5px}.snapshot-actions .text-action{font-size:9px}}
