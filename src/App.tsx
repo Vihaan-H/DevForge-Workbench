@@ -68,7 +68,7 @@ export default function App() {
     setNotice("Report export started.");
   }
 
-  const selected = modules.find((item) => item.id === active);
+  const selected = modules.find((item) => item.id === active);\n  const SelectedIcon = selected?.icon ?? CircleHelp;
 
   return (
     <div className="app-shell">
@@ -135,7 +135,7 @@ export default function App() {
           </div><div className="disclaimer"><CircleHelp size={16} /><p><strong>Keep expectations calibrated.</strong> These are baseline static rules, not a complete Chrome Web Store review. File existence checks and deeper project inspection are planned for Extension Inspector.</p></div>
           {notice && <div className="notice" role="status">{notice}<button onClick={() => setNotice("")} aria-label="Dismiss notice"><X size={14} /></button></div>}
           <footer className="page-footer"><span>MANIFEST MEDIC <span className="footer-dot">/</span> LOCAL ENGINE</span><span>Input is not sent to a server.</span></footer>
-        </section> : <section className="page-content planned-page"><div className="eyebrow"><span className="eyebrow-line" /> WORKBENCH MODULE</div><div className="planned-icon"><selected.icon size={28} /></div><h1 className="tool-title">{selected?.title ?? "Module"}<span>.</span></h1><p className="tool-intro">{selected?.description}</p><div className="planned-card"><div className="planned-card-icon"><Sparkles size={21} /></div><div><span className="module-status planned">PLANNED</span><h2>This module is not implemented yet.</h2><p>It is on the roadmap, but this screen is deliberately honest instead of pretending a button is a product. The first working module is Manifest Medic.</p><button className="primary-button" onClick={() => setActive("manifest")}><ShieldCheck size={16} /> Use Manifest Medic <ArrowUpRight size={15} /></button></div></div><footer className="page-footer"><span>DEVFORGE WORKBENCH <span className="footer-dot">/</span> BUILD 0001</span><span>Small reliable steps beat six pretend tools.</span></footer></section>}
+        </section> : <section className="page-content planned-page"><div className="eyebrow"><span className="eyebrow-line" /> WORKBENCH MODULE</div><div className="planned-icon"><SelectedIcon size={28} /></div><h1 className="tool-title">{selected?.title ?? "Module"}<span>.</span></h1><p className="tool-intro">{selected?.description}</p><div className="planned-card"><div className="planned-card-icon"><Sparkles size={21} /></div><div><span className="module-status planned">PLANNED</span><h2>This module is not implemented yet.</h2><p>It is on the roadmap, but this screen is deliberately honest instead of pretending a button is a product. The first working module is Manifest Medic.</p><button className="primary-button" onClick={() => setActive("manifest")}><ShieldCheck size={16} /> Use Manifest Medic <ArrowUpRight size={15} /></button></div></div><footer className="page-footer"><span>DEVFORGE WORKBENCH <span className="footer-dot">/</span> BUILD 0001</span><span>Small reliable steps beat six pretend tools.</span></footer></section>}
       </main>
       {notice && active === "overview" && <div className="toast" role="status">{notice}<button onClick={() => setNotice("")} aria-label="Dismiss notice"><X size={14} /></button></div>}
     </div>
