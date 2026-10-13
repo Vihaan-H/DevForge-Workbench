@@ -11,3 +11,31 @@
 
 .project-strip{display:flex;align-items:center;gap:9px;padding:12px;border:1px solid #30362b;background:#191c17;border-radius:8px;margin:24px 0 28px;flex-wrap:wrap}.project-strip-title{display:flex;align-items:center;gap:9px;color:var(--lime);margin-right:auto}.project-strip-title div{display:flex;flex-direction:column;gap:3px}.project-strip-title strong{font-size:11px;color:#e0e5d9}.project-strip-title small{font-size:9px;color:#838c79}.project-strip select,.project-strip input{min-width:120px;max-width:210px;border:1px solid #343b2f;border-radius:5px;background:#11140f;color:#dce2d3;padding:9px;font:10px "DM Mono",monospace}.project-strip input{width:155px}.project-strip .secondary-button{padding:9px 10px}.danger-icon:disabled{opacity:.3;cursor:not-allowed}.report-section-heading{margin-top:28px}.report-count{color:#8b9580;font:10px "DM Mono",monospace}.report-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.report-card,.empty-reports{border:1px solid #2d3328;background:#171a16;border-radius:8px;padding:14px;min-width:0}.report-card-top{display:flex;justify-content:space-between;gap:8px;margin-bottom:11px}.report-type{font:8px "DM Mono",monospace;letter-spacing:.7px;color:var(--lime);background:#252e1d;padding:4px 6px;border-radius:3px}.report-date{font:9px "DM Mono",monospace;color:#78806f}.report-card>strong{display:block;font-size:12px;overflow-wrap:anywhere}.report-card p,.empty-reports p{color:#8f9787;font-size:10px;line-height:1.6;margin:7px 0 10px}.text-action{display:inline-flex;align-items:center;gap:6px;color:#b8d78d;background:transparent;border:0;padding:5px 0;font-size:10px}.text-action:hover{color:var(--lime)}.empty-reports{display:flex;align-items:flex-start;gap:12px;color:#9bbd70}.empty-reports strong{font-size:11px;color:#dce2d3}.empty-reports p{margin-bottom:0}.finding-suggestion{border-left:2px solid #687f43;padding-left:8px!important;color:#c1d4a7!important}.finding-suggestion strong{color:#d7e9be}.settings-scrim{position:fixed;inset:0;z-index:20;background:#050604c9;display:grid;place-items:center;padding:18px;backdrop-filter:blur(7px)}.settings-dialog{width:min(520px,100%);max-height:min(90vh,760px);overflow:auto;background:#171a16;border:1px solid #39422f;border-radius:12px;padding:22px;box-shadow:0 20px 90px #000a}.settings-heading{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}.settings-heading h2{font:600 24px "Space Grotesk",sans-serif;margin:7px 0 0}.setting-row{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:15px 0;border-top:1px solid #2c3228;cursor:pointer}.setting-row span{display:flex;flex-direction:column;gap:5px}.setting-row strong{font-size:12px;color:#e0e5d9}.setting-row small{font-size:10px;line-height:1.5;color:#8d9683}.setting-row input[type=checkbox]{accent-color:var(--lime);width:17px;height:17px;flex-shrink:0}.setting-row input[type=number]{width:80px;background:#11140f;border:1px solid #39422f;color:#e0e5d9;border-radius:5px;padding:8px}.settings-actions{display:flex;justify-content:flex-end;gap:9px;margin-top:15px}.settings-footnote{font-size:10px;line-height:1.7;color:#7e8774;margin:16px 0 0}.compact-cards .report-card{padding:10px}.compact-cards .report-grid{gap:7px}
 @media(max-width:650px){.report-grid{grid-template-columns:1fr}.project-strip-title{width:100%}.project-strip select,.project-strip input{max-width:none;flex:1}.settings-dialog{padding:17px}.report-date{font-size:8px}}
+
+
+/* Phase 03: Extension Inspector and Phase 04: OutputJudge */
+.inspector-layout,.judge-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px}
+.inspector-files{min-height:500px}.archive-file-list{padding:8px;max-height:420px;overflow:auto}
+.archive-file{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:8px 7px;border-bottom:1px solid #292e25;font:10px "DM Mono",monospace;color:#c5d1b8}
+.archive-file span{overflow-wrap:anywhere;min-width:0}.archive-file small{color:#77816b;white-space:nowrap}
+.inspector-empty{display:flex;flex:1;min-height:300px;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:30px;text-align:center;color:var(--lime)}
+.inspector-empty strong{font:600 14px "Space Grotesk",sans-serif;color:#dce2d3}
+.inspector-empty p{font-size:11px;line-height:1.7;color:#929b88;max-width:320px}
+.inspector-status{display:flex;gap:8px;align-items:flex-start;margin-top:12px;padding:10px;border:1px solid #30372a;background:#1a1d17;border-radius:6px;color:#9ca58f;font-size:10px;line-height:1.6}
+.inspector-status svg{flex-shrink:0;color:#c9b77e}
+.judge-layout .editor-panel textarea{min-height:430px}
+.judge-rules{gap:12px}
+.judge-check{display:flex;align-items:center;gap:10px;border:1px solid #30372a;background:#1b1e19;border-radius:6px;padding:12px;cursor:pointer}
+.judge-check input{accent-color:var(--lime);width:16px;height:16px}
+.judge-check span{display:flex;flex-direction:column;gap:4px}.judge-check strong{font-size:11px}.judge-check small,.judge-field small{font-size:9px;line-height:1.5;color:#858e79}
+.judge-number-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.judge-number-row label{display:flex;flex-direction:column;gap:7px;font-size:10px;color:#aeb8a1}
+.judge-number-row input,.judge-field textarea{width:100%;border:1px solid #343b2f;border-radius:5px;background:#11140f;color:#dce2d3;padding:10px;font:10px/1.7 "DM Mono",monospace;min-width:0}
+.judge-field{display:flex;flex-direction:column;gap:6px;font-size:10px;color:#c7d2bc}
+.judge-field textarea{resize:vertical;min-height:65px}
+.judge-field textarea::placeholder,.judge-number-row input::placeholder{color:#596151}
+.judge-result{margin-top:14px;padding:17px;border:1px solid #30362b;background:#151713;border-radius:7px}
+.judge-result h2{font:600 17px "Space Grotesk",sans-serif;margin:6px 0 0}
+.judge-status{display:flex;align-items:center;gap:7px;font:9px "DM Mono",monospace;padding:7px 9px;border-radius:5px}
+.judge-status.passed{color:#bfe887;background:#27311e}.judge-status.failed{color:#ff9b8d;background:#392321}
+@media(max-width:950px){.inspector-layout,.judge-layout{grid-template-columns:1fr}.inspector-files{min-height:350px}.judge-layout .editor-panel textarea{min-height:300px}}
