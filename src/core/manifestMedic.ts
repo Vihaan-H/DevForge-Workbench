@@ -116,7 +116,9 @@ export function inspectManifest(source: string): ManifestCheckResult {
   }
 
   const summary = findings.reduce((counts, finding) => {
-    counts[finding.severity] += 1;
+    if (finding.severity === "error") counts.errors += 1;
+    else if (finding.severity === "warning") counts.warnings += 1;
+    else counts.info += 1;
     return counts;
   }, { errors: 0, warnings: 0, info: 0 });
 
