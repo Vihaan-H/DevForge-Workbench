@@ -68,7 +68,8 @@ export default function App() {
     setNotice("Report export started.");
   }
 
-  const selected = modules.find((item) => item.id === active);\n  const SelectedIcon = selected?.icon ?? CircleHelp;
+  const selected = modules.find((item) => item.id === active);
+  const SelectedIcon = selected?.icon ?? CircleHelp;
 
   return (
     <div className="app-shell">
