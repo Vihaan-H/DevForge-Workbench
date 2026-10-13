@@ -47,6 +47,10 @@ export default function App() {
   ), [filter]);
 
   useEffect(() => {
+    setManifestResult(inspectManifest(manifestSource));
+  }, [selectedProject?.id, manifestSource]);
+
+  useEffect(() => {
     const saved = saveWorkbenchState(workbench);
     if (!saved) setNotice("Browser storage is unavailable. Export your workbench JSON to keep a portable copy.");
   }, [workbench]);
