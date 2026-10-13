@@ -2,7 +2,7 @@
 
 A local-first developer testing workbench for browser extensions, web interfaces, and AI outputs.
 
-**Status:** early foundation (v0.4.0). Phases 01–04 establish persistent projects, backup/restore, report history, Manifest Medic, Extension Inspector, and OutputJudge. PromptLab, RegressionLab, and ChaosUI remain planned.
+**Status:** Phases 01–06 are implemented. The workbench includes project storage, backup/restore, report history, Manifest Medic, Extension Inspector, OutputJudge, PromptLab, and RegressionLab. ChaosUI and the companion extension remain planned.
 
 ## Implemented
 
@@ -44,10 +44,24 @@ These are static baseline rules, not a complete Chrome Web Store review. The eng
 - Produces deterministic PASS/FAIL findings, counts, and downloadable JSON reports.
 - Reports are added to the same local workbench history. It does not call an AI model or claim to verify truth or writing quality.
 
+### Phase 05: PromptLab
+- Stores prompt templates and frozen, numbered prompt versions per workbench project.
+- Lets you create test cases with context, required/forbidden phrases, and optional word-count bounds.
+- Evaluates manually pasted outputs against deterministic rules; it does not call a model or claim to judge factual accuracy or prose quality.
+- Saves runs with the tested prompt version and test case, shows PASS/FAIL findings, and compares two saved outputs side by side.
+- Saves prompt data in project-scoped browser storage and supports a separate JSON export. Review exports before sharing because they may contain private prompts and outputs.
+
+### Phase 06: RegressionLab
+- Compares baseline and candidate text snapshots with line-by-line added, removed, and unchanged lines.
+- Includes optional whitespace normalization and a bounded comparison engine (up to 1,200 lines per snapshot).
+- Saves up to 40 snapshots per project, reloads them into either comparison side, and imports/exports snapshot JSON.
+- Supports text, HTML/DOM text, CSS, JSON, and other code/config as text. It does not execute files, render a DOM, or perform pixel-based screenshot comparisons.
+- Adds comparison summaries to workbench report history and can export detailed diff reports.
+
 ## Privacy and data handling
 
 - Current features work without a backend, account, API key, or external AI service.
-- Project data and settings are stored in this browser's local storage.
+- Projects and settings are stored in this browser's local storage. PromptLab and RegressionLab keep additional project-scoped data under separate local storage keys; export those tool workspaces separately. Browser-local tool data is not automatically included in the main workbench JSON backup.
 - Use **Export workbench JSON** to make a backup before clearing browser data or switching devices.
 - Import replaces the current local projects, settings, and report history after confirmation (when that setting is enabled).
 - Exported reports may contain project names, manifest names, permissions, and diagnostic details. Review them before sharing.
