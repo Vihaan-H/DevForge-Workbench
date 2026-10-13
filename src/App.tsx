@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { Activity, ArrowUpRight, Braces, CheckCircle2, ChevronRight, CircleHelp, Command, FileSearch, FlaskConical, Gauge, Github, Layers3, LockKeyhole, Menu, Search, ShieldCheck, Sparkles, TerminalSquare, Workflow, X } from "lucide-react";
+import { Activity, ArrowUpRight, Braces, CheckCircle2, ChevronRight, CircleHelp, Command, FileSearch, FlaskConical, Gauge, GitBranch, Layers3, LockKeyhole, Menu, Search, ShieldCheck, Sparkles, TerminalSquare, Workflow, X } from "lucide-react";
 import { inspectManifest, type ManifestCheckResult } from "./core/manifestMedic";
 
 type ModuleId = "overview" | "manifest" | "inspector" | "output" | "prompts" | "regression" | "chaos";
@@ -92,7 +92,7 @@ export default function App() {
         })}
         <div className="sidebar-spacer" />
         <div className="privacy-card"><div className="privacy-icon"><LockKeyhole size={16} /></div><div><strong>Local-first by design</strong><p>Your manifest stays in this browser. No upload, no account, no mystery server.</p></div></div>
-        <a className="github-link" href="https://github.com/Vihaan-H/DevForge-Workbench" target="_blank" rel="noreferrer"><Github size={16} /> View source <ArrowUpRight size={14} /></a>
+        <a className="github-link" href="https://github.com/Vihaan-H/DevForge-Workbench" target="_blank" rel="noreferrer"><GitBranch size={16} /> View source <ArrowUpRight size={14} /></a>
         <div className="sidebar-footer"><span className="status-led" /> SYSTEM READY <span>v0.1.0</span></div>
       </aside>
 
