@@ -1,6 +1,6 @@
-import { useMemo, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { Archive, ArrowDownToLine, FileSearch, ShieldAlert, Upload } from "lucide-react";
-import { unzipSync, zipSync, strToU8, strFromU8 } from "fflate";
+import { unzipSync, zipSync, strFromU8 } from "fflate";
 
 type Finding = { severity: "error" | "warning" | "info"; title: string; detail: string; path?: string };
 type Props = { projectName: string; onReport: (summary: string, payload: unknown) => void };
@@ -8,7 +8,6 @@ type ArchiveFile = { path: string; bytes: Uint8Array };
 
 const MAX_ARCHIVE_BYTES = 20 * 1024 * 1024;
 const cleanPath = (path: string) => path.replace(/\\/g, "/").replace(/^\.\//, "");
-const isText = (path: string) => /\.(json|js|mjs|cjs|html|css|txt|svg|xml)$/i.test(path);
 
 function inspectFiles(files: ArchiveFile[]) {
   const findings: Finding[] = [];
@@ -67,7 +66,6 @@ export default function ExtensionInspector({ projectName, onReport }: Props) {
   const [manifestName, setManifestName] = useState("");
   const [status, setStatus] = useState("Choose a .zip extension package to inspect it locally.");
   const [busy, setBusy] = useState(false);
-  const fileMap = useMemo(() => new Map(files.map((file) => [cleanPath(file.path), file])), [files]);
 
   async function inspect(file?: File) {
     if (!file) return;
