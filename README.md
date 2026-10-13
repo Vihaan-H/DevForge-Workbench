@@ -2,7 +2,7 @@
 
 A local-first developer testing workbench for browser extensions, web interfaces, and AI outputs.
 
-**Status:** early foundation (v0.2.0). Phases 01 and 02 establish persistent projects, backup/restore, report history, settings, and the expanded Manifest Medic rules. The other five tools are clearly marked planned until their own implementation phases.
+**Status:** early foundation (v0.4.0). Phases 01–04 establish persistent projects, backup/restore, report history, Manifest Medic, Extension Inspector, and OutputJudge. PromptLab, RegressionLab, and ChaosUI remain planned.
 
 ## Implemented
 
@@ -27,7 +27,22 @@ A local-first developer testing workbench for browser extensions, web interfaces
 - Findings include severity, path where applicable, explanation, and suggested correction.
 - Deterministic Vitest coverage for invalid, incomplete, suspicious, and valid fixture manifests.
 
-These are static baseline rules, not a complete Chrome Web Store review. The engine never executes extension code. File existence checks and WebCRX/CRX Emulator compatibility still need real-world testing.
+These are static baseline rules, not a complete Chrome Web Store review. The engine never executes extension code. WebCRX/CRX Emulator compatibility still needs real-world testing.
+
+### Phase 03: Extension Inspector
+- Accepts ZIP packages up to 20 MB and inspects their files locally.
+- Checks for manifest.json, parses its root object, and verifies referenced popup, service worker, content-script, CSS, and icon paths.
+- Reports missing references, missing icon declarations, non-V3 manifests, malformed permissions, and potentially sensitive files.
+- Exports a JSON findings report and a ZIP copy of the inspected package.
+- Limits archive file count and unpacked size; excludes common macOS metadata.
+- Imported scripts are never executed. The inspector is a baseline, not a security audit.
+
+### Phase 04: OutputJudge
+- Checks manually supplied text with repeatable required-phrase and forbidden-phrase rules.
+- Supports optional minimum and maximum word counts.
+- Can require valid JSON and validate a practical JSON Schema subset: type, required, properties, items, minLength, maxLength, and pattern.
+- Produces deterministic PASS/FAIL findings, counts, and downloadable JSON reports.
+- Reports are added to the same local workbench history. It does not call an AI model or claim to verify truth or writing quality.
 
 ## Privacy and data handling
 
