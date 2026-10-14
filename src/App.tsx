@@ -156,8 +156,9 @@ export default function App() {
 
   return (
     <div className={`app-shell ${workbench.settings.compactCards ? "compact-cards" : ""}`}>
+      <a className="skip-link" href="#main-content">Skip to main content</a>
       <input ref={fileInput} type="file" accept=".json,application/json" hidden onChange={(event) => void importWorkspace(event.target.files?.[0])} />
-      <aside className={`sidebar ${mobileNavOpen ? "sidebar-open" : ""}`}>
+      <aside className={`sidebar ${mobileNavOpen ? "sidebar-open" : ""}`} aria-label="Workbench navigation">
         <div className="brand"><div className="brand-mark"><Command size={21} strokeWidth={2.5} /></div><div><strong>devforge<span>.</span></strong><small>WORKBENCH / LOCAL</small></div><button className="icon-button mobile-close" onClick={() => setMobileNavOpen(false)} aria-label="Close navigation"><X size={18} /></button></div>
         <div className="workspace-label">WORKSPACE</div>
         <button className={`nav-item ${active === "overview" ? "active" : ""}`} onClick={() => openModule("overview")}><Layers3 size={17} /><span>Overview</span><span className="nav-shortcut">⌘ 1</span></button>
@@ -169,7 +170,7 @@ export default function App() {
         <div className="sidebar-footer"><span className="status-led" /> SYSTEM READY <span>v0.2.0</span></div>
       </aside>
       {mobileNavOpen && <button className="mobile-scrim" aria-label="Close navigation overlay" onClick={() => setMobileNavOpen(false)} />}
-      <main className="main-area">
+      <main id="main-content" className="main-area">
         <header className="topbar">
           <button className="icon-button mobile-menu" onClick={() => setMobileNavOpen(true)} aria-label="Open navigation"><Menu size={20} /></button>
           <div className="breadcrumbs"><span>Workbench</span><ChevronRight size={14} /><strong>{selected?.title ?? "Overview"}</strong></div>
