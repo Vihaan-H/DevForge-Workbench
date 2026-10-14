@@ -1,0 +1,18 @@
+{
+  "manifest_version": 3,
+  "name": "DevForge Page Inspector",
+  "version": "1.0.0",
+  "description": "Run an explicit, local page-structure diagnostic and export a JSON report.",
+  "minimum_chrome_version": "102",
+  "permissions": [
+    "activeTab",
+    "scripting"
+  ],
+  "action": {
+    "default_title": "Inspect this page",
+    "default_popup": "popup.html"
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  }
+}
