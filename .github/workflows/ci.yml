@@ -22,5 +22,7 @@ jobs:
         run: npm test
       - name: Check companion extension package
         run: npm run check:extension
+      - name: Check release accessibility and privacy baselines
+        run: npm run check:release
       - name: Build production bundle
         run: npm run build
