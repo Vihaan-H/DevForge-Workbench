@@ -2,7 +2,7 @@
 
 A local-first developer testing workbench for browser extensions, web interfaces, and AI outputs.
 
-**Status:** Phases 01–06 are implemented. The workbench includes project storage, backup/restore, report history, Manifest Medic, Extension Inspector, OutputJudge, PromptLab, and RegressionLab. ChaosUI and the companion extension remain planned.
+**Status:** Phases 01–07 are implemented. The workbench includes project storage, backup/restore, report history, Manifest Medic, Extension Inspector, OutputJudge, PromptLab, RegressionLab, and ChaosUI. The companion extension and release hardening remain.
 
 ## Implemented
 
@@ -58,6 +58,14 @@ These are static baseline rules, not a complete Chrome Web Store review. The eng
 - Supports text, HTML/DOM text, CSS, JSON, and other code/config as text. It does not execute files, render a DOM, or perform pixel-based screenshot comparisons.
 - Adds comparison summaries to workbench report history and can export detailed diff reports.
 
+### Phase 07: ChaosUI
+- Provides an editable HTML fragment and CSS workspace, viewport stress presets, and a live preview in an opaque sandboxed iframe.
+- Includes baseline, mobile (375 px), tiny (280 px), enlarged text, keyboard-focus, high-contrast, and reduced-motion scenarios.
+- Removes scripts, event-handler attributes, forms, nested frames, external resource URLs, CSS imports, and CSS `url()` references from the preview.
+- Flags common static issues such as missing image alternatives, potentially unnamed buttons/links, skipped heading levels, duplicate IDs, removed focus outlines, and clipped overflow.
+- Stores the workspace per project, shares findings with report history, and exports JSON reports.
+- Static heuristics do not prove WCAG conformance and cannot measure rendered contrast, real reflow, or pixel differences.
+
 ## Privacy and data handling
 
 - Current features work without a backend, account, API key, or external AI service.
@@ -99,6 +107,6 @@ npm run build
 4. **OutputJudge:** deterministic rules for text, JSON, schemas, required/forbidden content, and length limits.
 5. **PromptLab:** version prompt templates and run test cases against manually supplied outputs, optionally evaluated by OutputJudge.
 6. **RegressionLab:** compare saved text/DOM/CSS snapshots and highlight diffs.
-7. **ChaosUI:** test layout/accessibility scenarios with reversible controls and clear reset behavior.
+7. **ChaosUI:** implemented with reversible scenario presets and a resettable sandbox preview.
 8. **Companion extension:** minimal-permission Chromium extension to capture explicitly requested page diagnostics and export a report.
 9. **Release hardening:** accessibility checks, cross-browser testing, docs, and reproducible builds.
