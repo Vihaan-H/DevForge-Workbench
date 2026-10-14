@@ -33,8 +33,6 @@ export function sanitizeChaosMarkup(html: string): { html: string; strippedFeatu
   return { html: safe, strippedFeatures: [...stripped] };
 }
 
-const count = (value: string, regex: RegExp) => [...value.matchAll(regex)].length;
-
 export function inspectChaosMarkup(html: string, css: string): ChaosInspection {
   const findings: ChaosFinding[] = [];
   const lower = html.toLowerCase();
