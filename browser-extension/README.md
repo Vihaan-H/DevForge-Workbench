@@ -23,6 +23,10 @@ No broad host permissions, persistent content scripts, background worker, remote
 
 The report contains the page title, origin + path (not query parameters or hash fragments), viewport/layout dimensions, counts for headings and interactive elements, and basic accessibility signals. It does **not** collect the page's visible text, form values, cookies, local storage, network traffic, screenshots, or script source. The report exists in popup memory until exported. JSON export is initiated locally.
 
+## Quality checks
+
+From the repository root, run `npm run check:extension`. The checker verifies manifest version and least-privilege permissions, local popup assets, no inline/remote popup resources, explicit-click injection, local report export, and JavaScript syntax.
+
 ## Limits
 
 The diagnostic is a heuristic, not a complete accessibility audit or security scanner. A control's computed accessible name and actual reading order require a real accessibility tree. Overflow is measured at capture time and can change with resizing. Do not treat a clean report as proof of WCAG conformance.
