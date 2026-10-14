@@ -2,7 +2,7 @@
 
 A local-first developer testing workbench for browser extensions, web interfaces, and AI outputs.
 
-**Status:** Phases 01–07 are implemented. The workbench includes project storage, backup/restore, report history, Manifest Medic, Extension Inspector, OutputJudge, PromptLab, RegressionLab, and ChaosUI. The companion extension and release hardening remain.
+**Status:** Phases 01–08 are implemented. The workbench includes project storage, backup/restore, report history, Manifest Medic, Extension Inspector, OutputJudge, PromptLab, RegressionLab, ChaosUI, and a minimal-permission Chromium companion extension. Release hardening remains.
 
 ## Implemented
 
@@ -66,6 +66,14 @@ These are static baseline rules, not a complete Chrome Web Store review. The eng
 - Stores the workspace per project, shares findings with report history, and exports JSON reports.
 - Static heuristics do not prove WCAG conformance and cannot measure rendered contrast, real reflow, or pixel differences.
 
+### Phase 08: Chromium companion extension
+- Adds `browser-extension/`, an installable Chromium Manifest V3 extension with a popup and local JSON export.
+- Uses only `activeTab` and `scripting`; it has no persistent host permissions, content scripts, background worker, storage permission, analytics, or server calls.
+- Inspection is explicitly click-triggered and measures page structure, layout dimensions, element counts, and basic accessibility signals without collecting visible page text or form values.
+- Reports retain the origin and path but omit query parameters and fragments to reduce accidental capture of tokens.
+- `npm run check:extension` validates the manifest and local popup package; CI runs this check alongside unit tests and the production build.
+- Browser-restricted tabs can refuse injection. This is expected and is never bypassed.
+
 ## Privacy and data handling
 
 - Current features work without a backend, account, API key, or external AI service.
@@ -108,5 +116,5 @@ npm run build
 5. **PromptLab:** version prompt templates and run test cases against manually supplied outputs, optionally evaluated by OutputJudge.
 6. **RegressionLab:** compare saved text/DOM/CSS snapshots and highlight diffs.
 7. **ChaosUI:** implemented with reversible scenario presets and a resettable sandbox preview.
-8. **Companion extension:** minimal-permission Chromium extension to capture explicitly requested page diagnostics and export a report.
+8. **Companion extension:** implemented in `browser-extension/`; user-triggered page diagnostics and JSON export with minimal permissions.
 9. **Release hardening:** accessibility checks, cross-browser testing, docs, and reproducible builds.
