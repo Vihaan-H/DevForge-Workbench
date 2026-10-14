@@ -2,7 +2,6 @@ export type ChaosScenario = "baseline" | "mobile" | "narrow" | "large-text" | "f
 export type ChaosFinding = { id: string; severity: "error" | "warning" | "info"; title: string; detail: string; line?: number };
 export interface ChaosInspection { findings: ChaosFinding[]; summary: { errors: number; warnings: number; info: number }; strippedFeatures: string[]; }
 
-const escapeHtml = (value: string) => value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 const safeUrl = (value: string) => /^(#|data:image\/(?:png|gif|jpeg|webp);base64,)/i.test(value.trim());
 /** Remove active content and remote resource references before creating an opaque sandbox preview. */
 export function sanitizeChaosMarkup(html: string): { html: string; strippedFeatures: string[] } {
@@ -10,17 +9,17 @@ export function sanitizeChaosMarkup(html: string): { html: string; strippedFeatu
   let safe = html.slice(0, 200_000);
   if (safe.length !== html.length) stripped.add("Input truncated at 200,000 characters");
   safe = safe.replace(/<!--[\s\S]*?-->/g, "");
-  safe = safe.replace(/<\s*(script|iframe|object|embed|applet|form|base|meta|link)\b[^>]*>[\s\S]*?<\s*\/\s*\1\s*>/gi, (match, tag: string) => { stripped.add(`Removed <${String(tag).toLowerCase()}> element`); return ""; });
+  safe = safe.replace(/<\s*(script|iframe|object|embed|applet|form|base|meta|link)\b[^>]*>[\s\S]*?<\s*\/\s*\1\s*>/gi, (_match, tag: string) => { stripped.add(`Removed <${String(tag).toLowerCase()}> element`); return ""; });
   safe = safe.replace(/<\s*(script|iframe|object|embed|applet|form|base|meta|link)\b[^>]*\/?\s*>/gi, (match, tag: string) => { stripped.add(`Removed <${String(tag).toLowerCase()}> element`); return ""; });
   safe = safe.replace(/\s+on[a-z]+\s*=\s*(?:"[^"]*"|'[^']*'|[^\s>]+)/gi, () => { stripped.add("Removed inline event handler"); return ""; });
-  safe = safe.replace(/\s+(src|href|action|formaction|poster|xlink:href)\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>]+))/gi, (whole, attr: string, double: string, single: string, bare: string) => {
+  safe = safe.replace(/\s+(src|href|action|formaction|poster|xlink:href)\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>]+))/gi, (_whole, attr: string, double: string, single: string, bare: string) => {
     const value = double ?? single ?? bare ?? "";
     if (safeUrl(value)) return ` ${attr}="${value.replace(/"/g, "&quot;")}"`;
     stripped.add("Removed remote or unsafe resource URL");
     return "";
   });
   safe = safe.replace(/\s+srcdoc\s*=\s*(?:"[^"]*"|'[^']*'|[^\s>]+)/gi, () => { stripped.add("Removed nested srcdoc"); return ""; });
-  safe = safe.replace(/\s+style\s*=\s*(?:"([^"]*)"|'([^']*)')/gi, (whole, double: string, single: string) => {
+  safe = safe.replace(/\s+style\s*=\s*(?:"([^"]*)"|'([^']*)')/gi, (_whole, double: string, single: string) => {
     const value = double ?? single ?? "";
     if (/url\s*\(|expression\s*\(|@import|javascript:/i.test(value)) { stripped.add("Removed unsafe inline style"); return ""; }
     return ` style="${value.replace(/"/g, "&quot;")}"`;
@@ -35,7 +34,6 @@ export function sanitizeChaosMarkup(html: string): { html: string; strippedFeatu
 
 export function inspectChaosMarkup(html: string, css: string): ChaosInspection {
   const findings: ChaosFinding[] = [];
-  const lower = html.toLowerCase();
   const images = [...html.matchAll(/<img\b([^>]*)>/gi)];
   images.forEach((match, index) => {
     const attrs = match[1] ?? "";
@@ -69,8 +67,6 @@ export function inspectChaosMarkup(html: string, css: string): ChaosInspection {
   if (/overflow\s*:\s*(?:hidden|clip)/i.test(css)) findings.push({ id: "overflow-hidden", severity: "warning", title: "Clipping overflow detected", detail: "At narrow widths or enlarged text, confirm important content and keyboard focus are not clipped." });
   if (!findings.length) findings.push({ id: "baseline", severity: "info", title: "No baseline rules were triggered", detail: "This is a lightweight static check, not a complete accessibility audit." });
   const summary = findings.reduce((acc, item) => { acc[item.severity === "error" ? "errors" : item.severity === "warning" ? "warnings" : "info"]++; return acc; }, { errors: 0, warnings: 0, info: 0 });
-  // A harmless reference keeps the input contract explicit without pretending to parse browser semantics.
-  void lower;
   return { findings, summary, strippedFeatures: [] };
 }
 
