@@ -31,7 +31,7 @@ assert.doesNotMatch(css, /fonts\.googleapis\.com/i, "Avoid third-party font requ
 assert.match(css, /:focus-visible/, "Keyboard focus needs a visible treatment.");
 assert.match(css, /prefers-reduced-motion\s*:\s*reduce/i, "Respect the operating system reduced-motion preference.");
 assert.match(css, /\.skip-link:focus/, "The skip link must become visible when focused.");
-assert.match(chaos, /sandboxed/i.test(chaos) ? /sandboxed/i : /sanitizeChaosMarkup/, "ChaosUI must keep the preview sanitization path.");
+assert.match(chaos, /sanitizeChaosMarkup/, "ChaosUI must keep the preview sanitization path.");
 
 assert.equal(extensionManifest.manifest_version, 3, "The companion must be Manifest V3.");
 assert.deepEqual([...extensionManifest.permissions].sort(), ["activeTab", "scripting"], "The companion must remain least-privilege.");
