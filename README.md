@@ -2,7 +2,7 @@
 
 A local-first developer testing workbench for browser extensions, web interfaces, and AI outputs.
 
-**Status:** Phases 01–08 are implemented. The workbench includes project storage, backup/restore, report history, Manifest Medic, Extension Inspector, OutputJudge, PromptLab, RegressionLab, ChaosUI, and a minimal-permission Chromium companion extension. Release hardening remains.
+**Status:** Phases 01–09 implementation is complete. The workbench includes local projects, Manifest Medic, Extension Inspector, OutputJudge, PromptLab, RegressionLab, ChaosUI, and a minimal-permission Chromium companion extension. Automated release-baseline checks are in CI; manual cross-browser smoke testing remains a release task.
 
 ## Implemented
 
@@ -74,9 +74,17 @@ These are static baseline rules, not a complete Chrome Web Store review. The eng
 - `npm run check:extension` validates the manifest and local popup package; CI runs this check alongside unit tests and the production build.
 - Browser-restricted tabs can refuse injection. This is expected and is never bypassed.
 
+### Phase 09: Release hardening
+- Adds a keyboard skip link to the main content and an accessible name for the workbench navigation landmark.
+- Honors the operating system's reduced-motion preference and removes the remote Google Fonts import. Typography falls back to local system fonts.
+- Adds a `no-referrer` policy on the app document to avoid forwarding the app URL as a referrer.
+- Adds `npm run check:release` for document metadata, tool integration, skip navigation, visible focus styling, reduced motion, remote font imports, and the companion permission baseline.
+- CI now runs unit tests, companion-extension validation, release-baseline checks, and the TypeScript/Vite production build.
+- Manual QA checklist: test keyboard-only navigation, reduced motion, narrow/mobile layout, extension behavior in supported Chromium browsers, and restricted browser pages before sharing broadly. Automated checks do not replace these real-browser checks.
+
 ## Privacy and data handling
 
-- Current features work without a backend, account, API key, or external AI service.
+- Current features work without a backend, account, API key, or external AI service. The workbench does not load third-party web fonts.
 - Projects and settings are stored in this browser's local storage. PromptLab and RegressionLab keep additional project-scoped data under separate local storage keys; export those tool workspaces separately. Browser-local tool data is not automatically included in the main workbench JSON backup.
 - Use **Export workbench JSON** to make a backup before clearing browser data or switching devices.
 - Import replaces the current local projects, settings, and report history after confirmation (when that setting is enabled).
@@ -117,4 +125,4 @@ npm run build
 6. **RegressionLab:** compare saved text/DOM/CSS snapshots and highlight diffs.
 7. **ChaosUI:** implemented with reversible scenario presets and a resettable sandbox preview.
 8. **Companion extension:** implemented in `browser-extension/`; user-triggered page diagnostics and JSON export with minimal permissions.
-9. **Release hardening:** accessibility checks, cross-browser testing, docs, and reproducible builds.
+9. **Release hardening:** automated baseline checks and keyboard/reduced-motion defaults implemented. Manual cross-browser smoke checks are documented but still need to be performed on target browsers/devices.
