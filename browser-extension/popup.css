@@ -1,0 +1,32 @@
+:root{color-scheme:dark;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;color:#e7ebdf;background:#11140f;--lime:#c5f467;--muted:#919b87;--line:#30372a;--panel:#1a1e17}
+*{box-sizing:border-box}
+body{margin:0;width:360px;min-height:420px;background:#11140f}
+button{font:inherit;cursor:pointer}
+button:focus-visible{outline:2px solid var(--lime);outline-offset:3px}
+.app{padding:18px}
+.brand{display:flex;align-items:center;gap:11px}
+.mark{display:grid;place-items:center;width:42px;height:42px;border-radius:11px;background:var(--lime);color:#1a2110;font-weight:900;font-size:22px}
+.eyebrow{font:9px ui-monospace,monospace;letter-spacing:1.4px;color:#8d9a75;margin:0 0 4px}
+h1{font-size:20px;letter-spacing:-.5px;margin:0}
+.intro{font-size:12px;line-height:1.6;color:#a5ad9b;margin:16px 0}
+.permission-note{display:flex;flex-direction:column;gap:6px;border:1px solid #3c4a2b;background:#20291a;border-radius:8px;padding:11px;font-size:11px;line-height:1.5;margin-bottom:13px}
+.permission-note strong{color:#d4eead}.permission-note span{color:#99a58a}
+.primary,.secondary{width:100%;border-radius:7px;padding:11px 12px;font-size:12px;font-weight:700}
+.primary{border:1px solid var(--lime);background:var(--lime);color:#19210f}
+.primary:disabled{opacity:.55;cursor:wait}
+.secondary{margin-top:8px;border:1px solid #46533a;background:#22291d;color:#d7e6bf}
+.status{font-size:11px;line-height:1.6;color:#abb39f;margin:12px 0}
+.status.error{color:#ff9b90}.status.success{color:#bde78b}
+section[hidden]{display:none}
+.results-heading{display:flex;justify-content:space-between;align-items:center;margin-top:16px}
+h2{font-size:14px;margin:0}
+.health{font:9px ui-monospace,monospace;color:#bfe887;background:#26321d;padding:5px 7px;border-radius:4px}
+.page-name{font-size:11px;line-height:1.5;color:#9da994;overflow-wrap:anywhere}
+.metrics{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:11px 0}
+.metric{border:1px solid var(--line);background:var(--panel);border-radius:7px;padding:10px;min-width:0}
+.metric strong{display:block;font-size:21px;color:var(--lime);font-variant-numeric:tabular-nums}
+.metric span{display:block;font:9px ui-monospace,monospace;color:#8f9985;margin-top:4px;line-height:1.4}
+.findings{padding-left:18px;color:#b7c2ac;font-size:10px;line-height:1.6}
+.findings li{margin:5px 0}
+.findings .alert{color:#ffb6a8}
+footer{border-top:1px solid #293026;padding-top:12px;margin-top:16px;font:9px ui-monospace,monospace;line-height:1.6;color:#68725d}
