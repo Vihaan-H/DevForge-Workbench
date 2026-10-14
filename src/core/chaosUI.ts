@@ -9,6 +9,7 @@ export function sanitizeChaosMarkup(html: string): { html: string; strippedFeatu
   let safe = html.slice(0, 200_000);
   if (safe.length !== html.length) stripped.add("Input truncated at 200,000 characters");
   safe = safe.replace(/<!--[\s\S]*?-->/g, "");
+  safe = safe.replace(/<\s*style\b[^>]*>[\s\S]*?<\s*\/\s*style\s*>/gi, () => { stripped.add("Removed embedded style element; use the CSS editor"); return ""; });
   safe = safe.replace(/<\s*(script|iframe|object|embed|applet|form|base|meta|link)\b[^>]*>[\s\S]*?<\s*\/\s*\1\s*>/gi, (_match, tag: string) => { stripped.add(`Removed <${String(tag).toLowerCase()}> element`); return ""; });
   safe = safe.replace(/<\s*(script|iframe|object|embed|applet|form|base|meta|link)\b[^>]*\/?\s*>/gi, (_match, tag: string) => { stripped.add(`Removed <${String(tag).toLowerCase()}> element`); return ""; });
   safe = safe.replace(/\s+on[a-z]+\s*=\s*(?:"[^"]*"|'[^']*'|[^\s>]+)/gi, () => { stripped.add("Removed inline event handler"); return ""; });
