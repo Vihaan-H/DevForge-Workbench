@@ -12,7 +12,7 @@ export function sanitizeChaosMarkup(html: string): { html: string; strippedFeatu
   safe = safe.replace(/<\s*(script|iframe|object|embed|applet|form|base|meta|link)\b[^>]*>[\s\S]*?<\s*\/\s*\1\s*>/gi, (_match, tag: string) => { stripped.add(`Removed <${String(tag).toLowerCase()}> element`); return ""; });
   safe = safe.replace(/<\s*(script|iframe|object|embed|applet|form|base|meta|link)\b[^>]*\/?\s*>/gi, (_match, tag: string) => { stripped.add(`Removed <${String(tag).toLowerCase()}> element`); return ""; });
   safe = safe.replace(/\s+on[a-z]+\s*=\s*(?:"[^"]*"|'[^']*'|[^\s>]+)/gi, () => { stripped.add("Removed inline event handler"); return ""; });
-  safe = safe.replace(/\s+(src|href|action|formaction|poster|xlink:href)\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>]+))/gi, (_whole, attr: string, double: string, single: string, bare: string) => {
+  safe = safe.replace(/\s+(src|srcset|href|action|formaction|poster|ping|xlink:href)\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>]+))/gi, (_whole, attr: string, double: string, single: string, bare: string) => {
     const value = double ?? single ?? bare ?? "";
     if (safeUrl(value)) return ` ${attr}="${value.replace(/"/g, "&quot;")}"`;
     stripped.add("Removed remote or unsafe resource URL");
