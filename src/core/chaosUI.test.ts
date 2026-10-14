@@ -3,8 +3,8 @@ import { buildChaosPreviewDocument, inspectChaosMarkup, sanitizeChaosMarkup } fr
 
 describe("ChaosUI safety and checks", () => {
   it("strips script blocks, event attributes, forms and remote URLs", () => {
-    const result = sanitizeChaosMarkup('<script>alert(1)</script><button onclick="run()">Go</button><img src="https://example.com/a.png"><form><input></form>');
-    expect(result.html).not.toMatch(/<script|onclick|https:\/\/|<form/i);
+    const result = sanitizeChaosMarkup('<script>alert(1)</script><style>body{background:url(https://example.com/bg.png)}</style><button onclick="run()">Go</button><img src="https://example.com/a.png" srcset="https://example.com/large.png 2x"><form><input></form>');
+    expect(result.html).not.toMatch(/<script|<style|onclick|https:\/\/|srcset|<form/i);
     expect(result.strippedFeatures.length).toBeGreaterThan(0);
   });
 
