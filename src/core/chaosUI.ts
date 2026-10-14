@@ -10,7 +10,7 @@ export function sanitizeChaosMarkup(html: string): { html: string; strippedFeatu
   if (safe.length !== html.length) stripped.add("Input truncated at 200,000 characters");
   safe = safe.replace(/<!--[\s\S]*?-->/g, "");
   safe = safe.replace(/<\s*(script|iframe|object|embed|applet|form|base|meta|link)\b[^>]*>[\s\S]*?<\s*\/\s*\1\s*>/gi, (_match, tag: string) => { stripped.add(`Removed <${String(tag).toLowerCase()}> element`); return ""; });
-  safe = safe.replace(/<\s*(script|iframe|object|embed|applet|form|base|meta|link)\b[^>]*\/?\s*>/gi, (match, tag: string) => { stripped.add(`Removed <${String(tag).toLowerCase()}> element`); return ""; });
+  safe = safe.replace(/<\s*(script|iframe|object|embed|applet|form|base|meta|link)\b[^>]*\/?\s*>/gi, (_match, tag: string) => { stripped.add(`Removed <${String(tag).toLowerCase()}> element`); return ""; });
   safe = safe.replace(/\s+on[a-z]+\s*=\s*(?:"[^"]*"|'[^']*'|[^\s>]+)/gi, () => { stripped.add("Removed inline event handler"); return ""; });
   safe = safe.replace(/\s+(src|href|action|formaction|poster|xlink:href)\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>]+))/gi, (_whole, attr: string, double: string, single: string, bare: string) => {
     const value = double ?? single ?? bare ?? "";
@@ -24,7 +24,7 @@ export function sanitizeChaosMarkup(html: string): { html: string; strippedFeatu
     if (/url\s*\(|expression\s*\(|@import|javascript:/i.test(value)) { stripped.add("Removed unsafe inline style"); return ""; }
     return ` style="${value.replace(/"/g, "&quot;")}"`;
   });
-  safe = safe.replace(/<\s*([a-z][\w:-]*)\b([^>]*)>/gi, (whole, tag: string, attrs: string) => {
+  safe = safe.replace(/<\s*([a-z][\w:-]*)\b([^>]*)>/gi, (_whole, tag: string, attrs: string) => {
     const normalizedTag = String(tag).toLowerCase();
     if (["html", "head", "body", "title"].includes(normalizedTag)) return "";
     return `<${normalizedTag}${attrs}>`;
@@ -61,7 +61,6 @@ export function inspectChaosMarkup(html: string, css: string): ChaosInspection {
   const ids = [...html.matchAll(/\bid\s*=\s*(['"])(.*?)\1/gi)].map((match) => match[2]).filter(Boolean);
   const duplicates = ids.filter((id, index) => ids.indexOf(id) !== index);
   [...new Set(duplicates)].forEach((id) => findings.push({ id: `duplicate-id-${id}`, severity: "warning", title: "Duplicate element ID", detail: `The ID "${id}" appears more than once.` }));
-  if (!/\bviewport\b/i.test(html) && /<meta\b[^>]*name\s*=\s*["']viewport/i.test(html)) findings.push({ id: "viewport-review", severity: "info", title: "Review viewport configuration", detail: "Confirm the document uses width=device-width for predictable mobile layout." });
   if (/(outline\s*:\s*none|outline\s*:\s*0)(?![^{}]*:focus)/i.test(css)) findings.push({ id: "outline-removed", severity: "warning", title: "CSS may remove focus outlines", detail: "Ensure keyboard focus remains visible with a clear :focus-visible style." });
   if (/font-size\s*:\s*(?:[0-9]+(?:\.[0-9]+)?px|[0-9]+(?:\.[0-9]+)?pt)\b/i.test(css)) findings.push({ id: "fixed-font-size", severity: "info", title: "Fixed font sizes detected", detail: "Check text resizing at 200% zoom and prefer scalable units for body text." });
   if (/overflow\s*:\s*(?:hidden|clip)/i.test(css)) findings.push({ id: "overflow-hidden", severity: "warning", title: "Clipping overflow detected", detail: "At narrow widths or enlarged text, confirm important content and keyboard focus are not clipped." });
