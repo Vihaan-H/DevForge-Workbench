@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>DevForge Page Inspector</title>
+  <link rel="stylesheet" href="popup.css">
+  <script src="popup.js" defer></script>
+</head>
+<body>
+  <main class="app">
+    <header class="brand">
+      <div class="mark" aria-hidden="true">D</div>
+      <div><p class="eyebrow">DEVFORGE / COMPANION</p><h1>Page Inspector</h1></div>
+    </header>
+    <p class="intro">One-click page structure checks. Runs locally on the active tab and collects counts, not page text.</p>
+    <div class="permission-note"><strong>Only runs when you click Inspect.</strong><span>No persistent content scripts, analytics, network requests, or broad host permissions.</span></div>
+    <button id="inspect" class="primary" type="button">Inspect this page</button>
+    <p id="status" class="status" role="status" aria-live="polite">Ready. Open a regular website tab to begin.</p>
+    <section id="results" aria-labelledby="results-title" hidden>
+      <div class="results-heading"><h2 id="results-title">Latest report</h2><span id="health" class="health">LOCAL</span></div>
+      <p id="page-name" class="page-name"></p>
+      <div id="metrics" class="metrics"></div>
+      <ul id="findings" class="findings"></ul>
+      <button id="export" class="secondary" type="button">Export JSON report</button>
+    </section>
+    <footer>DevForge Workbench · No page scripts are added to the site.</footer>
+  </main>
+</body>
+</html>
