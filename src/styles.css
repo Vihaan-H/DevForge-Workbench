@@ -105,3 +105,25 @@
 .diff-same code{color:#7f8876}
 @media(max-width:1000px){.prompt-layout{grid-template-columns:1fr}.prompt-editor>textarea{min-height:220px!important}.regression-controls{grid-template-columns:1fr}.snapshot-row{align-items:flex-start;flex-direction:column}.snapshot-actions{justify-content:flex-start}}
 @media(max-width:600px){.prompt-meta,.run-compare-selects,.output-comparison{grid-template-columns:1fr}.output-comparison>p{grid-column:auto}.prompt-actions{align-items:flex-start;flex-direction:column}.diff-line{grid-template-columns:18px 26px 26px minmax(0,1fr);font-size:9px}.toolbar-actions .import-snapshot{display:none}.snapshot-actions{gap:5px}.snapshot-actions .text-action{font-size:9px}}
+
+
+/* Phase 07: ChaosUI */
+.chaos-toolbar{display:grid;grid-template-columns:minmax(180px,.8fr) minmax(0,1.4fr) auto;align-items:center;gap:12px;margin:13px 0}
+.chaos-toolbar>.judge-field{display:flex;flex-direction:column;gap:6px;font-size:10px;color:#c7d2bc}
+.chaos-toolbar select{width:100%;border:1px solid #343b2f;border-radius:5px;background:#11140f;color:#dce2d3;padding:10px;font:10px "DM Mono",monospace}
+.chaos-scenario-info{display:flex;align-items:flex-start;gap:10px;padding:11px;border:1px solid #30372a;border-radius:6px;background:#191c17;color:var(--lime);min-width:0}
+.chaos-scenario-info>div{min-width:0}
+.chaos-scenario-info strong{font-size:11px;color:#dce2d3}
+.chaos-scenario-info p{font-size:10px;line-height:1.55;color:#8f9984;margin:5px 0 0}
+.chaos-editors{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.chaos-editors .editor-panel{min-height:410px}
+.chaos-editors .editor-panel textarea{min-height:320px}
+.chaos-preview-panel,.chaos-findings-panel{margin-top:13px}
+.chaos-preview-panel .results-header h2{display:flex;align-items:center;gap:8px}
+.chaos-viewport-shell{margin-top:14px;padding:10px;background:#10120f;border:1px solid #2b3127;border-radius:7px;overflow:auto}
+.chaos-viewport-meta{display:flex;justify-content:space-between;gap:10px;color:#76816b;font:9px "DM Mono",monospace;padding:0 2px 10px}
+.chaos-viewport-shell iframe{max-width:100%;color-scheme:light}
+.chaos-findings-panel{margin-bottom:10px}
+.chaos-findings-panel .finding-list{max-height:470px}
+@media(max-width:1000px){.chaos-toolbar{grid-template-columns:1fr 1fr}.chaos-toolbar>.primary-button{grid-column:1/-1;justify-self:start}.chaos-editors{grid-template-columns:1fr}.chaos-editors .editor-panel{min-height:330px}.chaos-editors .editor-panel textarea{min-height:240px}}
+@media(max-width:600px){.chaos-toolbar{grid-template-columns:1fr}.chaos-toolbar>.primary-button{grid-column:auto;width:100%}.chaos-viewport-shell{padding:6px}.chaos-viewport-meta{font-size:8px}.chaos-preview-panel .results-header{align-items:flex-start;gap:10px;flex-direction:column}}
